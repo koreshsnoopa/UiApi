@@ -17,7 +17,7 @@ namespace BookingTests
             Assert.AreEqual(LANGUAGE, mainPage.GetCurrentLanguage());
         }
 
-        [Test] //???
+        [Test] 
         public void ChangeCurrencyTest()
         {
             driver.Navigate().GoToUrl(BOOKING_URL);

@@ -41,20 +41,17 @@ namespace BookingTests
         }
 
         //Currency in short form e.g. BYN, RUB, PLN etc.
-        public MainPage ChangeCurrency(string currency) //?????????????????????
+        public MainPage ChangeCurrency(string currency)
         {
             _curryncyButton.Click();
             _driver.FindElement(By.XPath($"//ul[contains(@class,'size')]//a[contains(@href,'{currency}')]/.."))
                 .Click();
-            
-            //Thread.Sleep(100);
             return this;
         }
 
         public MainPage ChangeLanguage(string language)
         {
             _languageBytton.Click();
-
             _driver.FindElement(By.XPath($"//div[@lang][contains(text(),'{language}')]")).Click();
             return this;
         }
@@ -62,14 +59,12 @@ namespace BookingTests
         public FlightsPage GoToFlightsPage()
         {
             _flightsPage.Click();
-
             return new FlightsPage();
         }
 
         public MainPage LogInAs(User user)
         {
             _driver.FindElement(LogInButtonLocator).Click();
-
             return new LogInPage().LogInAs(user);
         }
 
@@ -95,11 +90,10 @@ namespace BookingTests
         {
            string todayDate = GetTodaysDate(); 
            int.TryParse(todayDate.Remove(0, todayDate.Length - 2), out int res);
-
             return todayDate.Remove(todayDate.Length - 2)+(res + n).ToString();
         }
 
-        private void SetNumberOfPeopleAndRooms(ItemsToFilter item, int number) //+exception: number < 0
+        private void SetNumberOfPeopleAndRooms(ItemsToFilter item, int number) 
         {
             _changeNumberOfPeople.Click();
             int.TryParse(_driver
@@ -131,12 +125,13 @@ namespace BookingTests
         }
 
         public SearchResultPage SetFilterAndSearch(string checkInDate, string checkOutDate, int numberOfAdults,
-            int numberOfRooms, string city) //+exception: kid older then 17
+            int numberOfRooms, string city) 
         {
-            _cityInput.SendKeys(city);
             _checkInAndOut.Click();
             _driver.FindElement(By.XPath($"//td[@data-date='{checkInDate}']")).Click();
             _driver.FindElement(By.XPath($"//td[@data-date='{checkOutDate}']")).Click();
+            _cityInput.SendKeys(city);
+            _driver.FindElement(By.XPath("//ul[@role='listbox']/li[1]")).Click();
             SetNumberOfPeopleAndRooms(ItemsToFilter.adults, numberOfAdults);
             SetNumberOfPeopleAndRooms(ItemsToFilter.rooms, numberOfRooms);
             _searchButton.Click();
@@ -150,7 +145,6 @@ namespace BookingTests
             _driver.FindElement(AddAgeOfKidLocator).Click();
             _driver.FindElement(By.XPath($"//option[@value='{ageOfKid}']")).Click();
             SetFilterAndSearch(checkInDate, checkOutDate, numberOfAdults, numberOfRooms, city);
-
             return new SearchResultPage();
         }
 
