@@ -31,7 +31,7 @@ namespace BookingTests
         {
             driver.Navigate().GoToUrl(BOOKING_URL);
 
-            Assert.IsTrue(new MainPage().GoToFlightsPage().IsFlightPage());
+            Assert.NotNull(new MainPage().GoToFlightsPage());
         }
 
         [Test]

@@ -58,7 +58,11 @@ namespace BookingTests
 
         public FlightsPage GoToFlightsPage()
         {
+            string url1 = _driver.Url;
             _flightsPage.Click();
+            _driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(0);
+            wait.Until(d => d.FindElement(By.XPath("//body[contains(@class, 'FlightsSearch')]")));
+            _driver.Manage().Timeouts().ImplicitWait = System.TimeSpan.FromSeconds(10);
             return new FlightsPage();
         }
 
