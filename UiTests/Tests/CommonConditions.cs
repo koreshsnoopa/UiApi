@@ -24,7 +24,7 @@ namespace BookingTests
             {
                 var screenFile = ((ITakesScreenshot)DriverSingleton.GetDriver()).GetScreenshot();
                 screenFile
-                    .SaveAsFile($"/Users/marialukasova/Projects/epam_tasks/framework_tests/Target/Screenshots/{DateTime.Now.ToString("dd_MM_yy_HH_mm_ss")}.png", ScreenshotImageFormat.Png);
+                    .SaveAsFile($"/Users/marialukasova/Projects/UIApiTests/UiTests/Targets/{DateTime.Now.ToString("dd_MM_yy_HH_mm_ss")}.png", ScreenshotImageFormat.Png);
             }
             DriverSingleton.CloseDriver();
         }

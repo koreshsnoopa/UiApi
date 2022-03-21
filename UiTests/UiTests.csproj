@@ -17,5 +17,19 @@
   <ItemGroup>
     <None Remove="Selenium.WebDriver" />
     <None Remove="Selenium.WebDriver.ChromeDriver" />
+    <None Remove="Pages\" />
+    <None Remove="Models\" />
+    <None Remove="Services\" />
+    <None Remove="Driver\" />
+    <None Remove="Tests\" />
+    <None Remove="Targets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Driver\" />
+    <Folder Include="Tests\" />
+    <Folder Include="Targets\" />
   </ItemGroup>
 </Project>

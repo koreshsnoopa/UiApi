@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace BookingTests
 {
@@ -43,6 +44,9 @@ namespace BookingTests
         //Currency in short form e.g. BYN, RUB, PLN etc.
         public MainPage ChangeCurrency(string currency)
         {
+            if (string.IsNullOrEmpty(currency))
+                throw new ArgumentException("Currency is null or empty!");
+
             _curryncyButton.Click();
             _driver.FindElement(By.XPath($"//ul[contains(@class,'size')]//a[contains(@href,'{currency}')]/.."))
                 .Click();
@@ -51,6 +55,9 @@ namespace BookingTests
 
         public MainPage ChangeLanguage(string language)
         {
+            if (string.IsNullOrEmpty(language))
+                throw new ArgumentException("Language is null or empty!");
+
             _languageBytton.Click();
             _driver.FindElement(By.XPath($"//div[@lang][contains(text(),'{language}')]")).Click();
             return this;
@@ -92,6 +99,9 @@ namespace BookingTests
 
         public string GetNDaysFromTodayDate(int n)
         {
+            if (n < 0)
+                throw new ArgumentException("Nubmer of days is not correct!");
+
            string todayDate = GetTodaysDate(); 
            int.TryParse(todayDate.Remove(0, todayDate.Length - 2), out int res);
             return todayDate.Remove(todayDate.Length - 2)+(res + n).ToString();
@@ -145,6 +155,13 @@ namespace BookingTests
         public SearchResultPage SetFilterAndSearch(string checkInDate, string checkOutDate, int numberOfAdults,
             int numberOfKids, int ageOfKid, int numberOfRooms, string city)
         {
+            if (numberOfAdults < 0 || numberOfRooms < 0)
+                throw new ArgumentException("Nubmer of adults or rooms is not correct!");
+            if (string.IsNullOrEmpty(checkInDate) || string.IsNullOrEmpty(checkOutDate))
+                throw new ArgumentException("Date is not correct!");
+            if (string.IsNullOrEmpty(city))
+                throw new ArgumentException("City is not correct!");
+
             SetNumberOfPeopleAndRooms(ItemsToFilter.children, numberOfKids);
             _driver.FindElement(AddAgeOfKidLocator).Click();
             _driver.FindElement(By.XPath($"//option[@value='{ageOfKid}']")).Click();
